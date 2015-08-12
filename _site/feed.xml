@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogflop</title>
+    <description>A place for my random ramblings of rambledom.</description>
+    <link>ssh://lengau.net/</link>
+    <atom:link href="ssh://lengau.net/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Wed, 12 Aug 2015 11:32:35 -0500</pubDate>
+    <lastBuildDate>Wed, 12 Aug 2015 11:32:35 -0500</lastBuildDate>
+    <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>Statement of Intent</title>
+        <description>&lt;p&gt;My main purpose in having this blog is to share my small projects with the world.&lt;/p&gt;
+
+&lt;p&gt;Facebook and Reddit posts both tend to fall into the abyss along with all the 
+unimportant stuff, and I really want a spot where I can come back to things I’ve
+written later.&lt;/p&gt;
+
+&lt;p&gt;So here it is. If you find my opinions interesting, please feel free to
+subscribe to my newsletter.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Aug 2015 06:06:57 -0500</pubDate>
+        <link>ssh://lengau.net/meta/2015/08/12/statement-of-intent/</link>
+        <guid isPermaLink="true">ssh://lengau.net/meta/2015/08/12/statement-of-intent/</guid>
+        
+        
+        <category>meta</category>
+        
+      </item>
+    
+  </channel>
+</rss>

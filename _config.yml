@@ -1,0 +1,12 @@
+# Site settings
+title: Blogflop
+email: lengau@lengau.net
+description: "A place for my random ramblings of rambledom."
+baseurl: ""
+url: "ssh://lengau.net"
+twitter_username: lengau
+github_username:  lengau
+
+# Build settings
+markdown: kramdown
+permalink: pretty
