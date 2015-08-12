@@ -12,4 +12,6 @@ unimportant stuff, and I really want a spot where I can come back to things I've
 written later.
 
 So here it is. If you find my opinions interesting, please feel free to
-subscribe to my newsletter.
+[subscribe to my newsletter][rss-feed].
+
+[rss-feed]: https://lengau.github.io/feed.xml
