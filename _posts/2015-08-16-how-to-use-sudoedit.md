@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "What sudo does and why you shouldn't use it"
-categories: linux, terminal, commandline, cli, sudo
+categories: linux terminal commandline cli sudo
 ---
 
 Occasionally, I stumble upon [posts][raspi-tutorial] that include commands that
