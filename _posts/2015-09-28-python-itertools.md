@@ -15,7 +15,7 @@ generators. I'll cover just a few here.
 
 ## Review: count and product
 
-`count` and `[product]` are the two functions from `itertools` that I see used
+`count` and `product` are the two functions from `itertools` that I see used
 the most, although I do still see (and am guilty of writing) code that uses
 more lines to do the same things. A comparison of `count` and `product` to the
 naïve code that forms the same logic should suffice.
