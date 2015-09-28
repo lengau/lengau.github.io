@@ -5,9 +5,555 @@
     <description>A place for my random ramblings of rambledom.</description>
     <link>ssh://lengau.net/</link>
     <atom:link href="ssh://lengau.net/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 12 Aug 2015 11:37:03 -0500</pubDate>
-    <lastBuildDate>Wed, 12 Aug 2015 11:37:03 -0500</lastBuildDate>
+    <pubDate>Mon, 28 Sep 2015 14:13:34 -0500</pubDate>
+    <lastBuildDate>Mon, 28 Sep 2015 14:13:34 -0500</lastBuildDate>
     <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>Python: Itertools and why you should use it.</title>
+        <description>&lt;p&gt;I’m sure most Python programmers are at least vaguely familiar with
+&lt;a href=&quot;https://docs.python.org/3/library/itertools.html&quot;&gt;itertools&lt;/a&gt;. Most likely in the form of &lt;code&gt;itertools.count&lt;/code&gt; and
+&lt;code&gt;itertools.product&lt;/code&gt;, which are probably sitting somewhere in your code.&lt;/p&gt;
+
+&lt;p&gt;What you may not be as familiar with (at least, I wasn’t until I bothered to
+read the full docs today) are some of the other convenient iterators and
+generators. I’ll cover just a few here.&lt;/p&gt;
+
+&lt;h2 id=&quot;review-count-and-product&quot;&gt;Review: count and product&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;count&lt;/code&gt; and &lt;code&gt;[product]&lt;/code&gt; are the two functions from &lt;code&gt;itertools&lt;/code&gt; that I see used
+the most, although I do still see (and am guilty of writing) code that uses
+more lines to do the same things. A comparison of &lt;code&gt;count&lt;/code&gt; and &lt;code&gt;product&lt;/code&gt; to the
+naïve code that forms the same logic should suffice.&lt;/p&gt;
+
+&lt;h3 id=&quot;count&quot;&gt;&lt;a href=&quot;https://docs.python.org/3/library/itertools.html#itertools.count&quot;&gt;count&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;A fairly common pattern seen all over the case, implemented in dozens of
+programming languages, is something like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;i = start_value
+while True:
+    do_something_with(i)
+    if we_need_to_exit():
+        break
+    i += step_size
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is incredibly common when you’re unsure what the last value you’re going
+to need to operate on is. Unfortunately, it’s somewhat uglier in Python than
+the same pattern in C. (It’s also fairly ugly in Pascal since you also have to
+use a while loop, and it’s also pretty in other C-like languages.)&lt;/p&gt;
+
+&lt;p&gt;In C, we can write it as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for (i = start_value; we_need_to_exit(); i += step_size){
+    do_something_with(i);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is possible because the loop condition in C is explicitly stated, and can
+be any expression. In truth, Python doesn’t actually have a real for loop. The
+for loop in Python is really a &lt;a href=&quot;https://en.wikipedia.org/wiki/Foreach_loop&quot;&gt;foreach loop&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;itertools.count&lt;/code&gt;, however can help us improve our Python code. It’s still
+not quite as concise as the C version, but it’s getting there:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import count
+
+for i in count(start_value, step_size):
+    do_something_with(i)
+    if we_need_to_exit():
+        break
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This version has a few advantages:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It makes the fact that you’re simply counting more obvious&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;i&lt;/code&gt; falls out of scope when you exit the loop&lt;/li&gt;
+  &lt;li&gt;It’s shorter, which makes a bug less likely to hide in it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;product&quot;&gt;&lt;a href=&quot;https://docs.python.org/3/library/itertools.html#itertools.product&quot;&gt;product&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;product&lt;/code&gt; is less obviously advantageous than &lt;code&gt;count&lt;/code&gt;, unless you (or your
+code reviewer) shares Linus Torvalds’s belief that more than 3 levels of
+indentation is a sign of bad code.&lt;/p&gt;
+
+&lt;p&gt;In practical terms, &lt;code&gt;product&lt;/code&gt; is essentially a certain class of nested for loop.
+What was:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in range(10):
+    for j in range(10):
+        do_something_with(i, j)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;becomes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import product
+
+for i, j in product(range(10), repeat=2):
+    do_something_with(i, j)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or if your i and j aren’t iterating over the same thing:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in list_of_i_values:
+    for j in list_of_j_values:
+        do_something_with(i, j)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;can become:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import product
+
+for i, j in product(list_of_i_values, list_of_j_values):
+    do_something_with(i, j)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;other-nested-for-loops&quot;&gt;Other nested for loops&lt;/h2&gt;
+
+&lt;p&gt;That’s all well and good, but there are plenty of other uses of nested for
+loops that aren’t doable with &lt;code&gt;product&lt;/code&gt;. So what are they?&lt;/p&gt;
+
+&lt;h3 id=&quot;permutations-and-combinations&quot;&gt;&lt;a href=&quot;https://docs.python.org/3/library/itertools.html#itertools.permutations&quot;&gt;permutations&lt;/a&gt; and &lt;a href=&quot;https://docs.python.org/3/library/itertools.html#itertools.combinations&quot;&gt;combinations&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;These are the permutations you’re probably expecting if you remember anything
+about statistics at all, you probably know what to expect.&lt;/p&gt;
+
+&lt;p&gt;In practical terms, &lt;code&gt;permutations&lt;/code&gt; is equivalent to &lt;code&gt;product&lt;/code&gt; with all the
+duplicates removed. A very general version might be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import product
+
+for working_values in product(values, repeat=n):
+    if len(set(working_values)) &amp;lt; len(working_values):
+        continue
+    do_something_with(*working_values)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Any time you’re deduplicating &lt;code&gt;product&lt;/code&gt; in a similar way, you may as well skip
+it and use &lt;code&gt;permutations&lt;/code&gt; instead.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;combinations&lt;/code&gt; is the same as the combinations you’ll see in statistics, too.
+A hand of cards in bridge is a 13 card long combination of a deck, for example.
+But lots of algorithms with running time &lt;code&gt;~n^2&lt;/code&gt; can use combinations, too:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in range(start, stop):
+    for j in range(i + 1, stop):
+        do_something_with(i, j)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;it’s fairly easy to understand, and if you’re working with pairs of points in a
+space, it looks alright to do:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i, a in enumerate(points):
+    for b in points[i+1:]:
+        do_something_with(a, b)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;combinations&lt;/code&gt; looks even better, though:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import combinations
+
+for my_points in combinations(points, 2):
+    do_something_with(*my_points)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Isn’t that so much prettier? Especially since you now can (but needn’t) have an
+iterable containing the combination, instead of 2, 3, 5, or 13 different
+variables.&lt;/p&gt;
+
+&lt;h3 id=&quot;combinationswithreplacement&quot;&gt;&lt;a href=&quot;https://docs.python.org/3/library/itertools.html#itertools.combinations_with_replacement&quot;&gt;combinations_with_replacement&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;As a quick side note, &lt;code&gt;combinations_with_replacement&lt;/code&gt; may be one of the
+least-known functions in &lt;code&gt;itertools&lt;/code&gt;. The biggest reason for this is its
+relative newness. It was only added in versions 2.7 and 3.1, so if you need to
+target versions of Python that are more than five years old, you can’t use it.&lt;/p&gt;
+
+&lt;p&gt;The nested for loop of:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i, a in enumerate(points):
+    for b in points[i:]:
+        do_something_with(a, b)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;can become:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import combinations_with_replacement as combine
+
+for a, b in combine(points, 2):
+    do_something_with(a, b)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If ordering doesn’t matter, this particular nested loop can become:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from itertools import combinations
+
+for a, b in combinations(points, 2):
+    do_something_with(a, b)
+
+for a in points:
+    do_something_with(a, a)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Although at that point, I’d probably just use the nested for loop.&lt;/p&gt;
+
+&lt;h2 id=&quot;final-thoughts&quot;&gt;Final thoughts&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.python.org/3/library/itertools.html&quot;&gt;itertools&lt;/a&gt; is a very powerful library in Python for looping, and can be used
+in a huge variety of ways. With &lt;code&gt;product&lt;/code&gt;, it can even be used to make nested
+loops of unknown depth in just a couple of lines.&lt;/p&gt;
+
+&lt;p&gt;Know it. Use it. Love it.&lt;/p&gt;
+
+&lt;p&gt;Or at least know it exists for now. Once you know about it, you’ll probably
+find great ways to use it later.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 28 Sep 2015 07:02:50 -0500</pubDate>
+        <link>ssh://lengau.net/python/2015/09/28/python-itertools/</link>
+        <guid isPermaLink="true">ssh://lengau.net/python/2015/09/28/python-itertools/</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>Python Does Have Static Variables (They&#39;re Just a Bit Weird)</title>
+        <description>&lt;p&gt;“Python doesn’t have static variables”.&lt;/p&gt;
+
+&lt;p&gt;This is technically true, but at the same time a little bit wrong. Sure, there’s
+nothing in Python specifically called a static variable, but don’t confuse that
+with not having the same functionality.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-note-on-objects&quot;&gt;A note on objects&lt;/h2&gt;
+
+&lt;p&gt;The (easiest) way to create a static variable in Python is by abusing the fact
+that everything is an object. In most cases in Python where you’d want to create
+a static variable, consider moving your function into an object. It may fit
+better there, even if your static variable ends up being a class variable.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-do-it&quot;&gt;How to do it&lt;/h2&gt;
+
+&lt;p&gt;To create a static variable in Python, you simply have to make it a class
+variable of the function you’re using it from.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Wait, what?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Remember when you learned Python, everyone kept telling you that everything is
+an object? Well everything is an object. Everything.&lt;/p&gt;
+
+&lt;iframe src=&quot;http://gfycat.com/ifr/PlaintiveBigIbadanmalimbe&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; width=&quot;476&quot; height=&quot;268&quot; style=&quot;-webkit-backface-visibility: hidden;-webkit-transform: scale(1);&quot;&gt;
+&lt;/iframe&gt;
+
+&lt;p&gt;Including functions.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-code&quot;&gt;The code&lt;/h3&gt;
+
+&lt;p&gt;Here’s a simple example of a an IPython session where I created a function with
+a static variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In [1]: def static_variable_test():
+   ...:     static_variable_test._static += 1
+   ...:     print(static_variable_test._static)
+   ...:     
+
+In [2]: static_variable_test._static = 0
+
+In [3]: static_variable_test()
+1
+
+In [4]: static_variable_test()
+2
+
+In [5]: static_variable_test()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The static variable is referred to by the name &lt;code&gt;static_variable_test._static&lt;/code&gt;.
+This is actually the name of a class variable of the class 
+&lt;code&gt;static_variable_test&lt;/code&gt;. Input 2 clearly shows us creating that variable. This is
+once again possible because everything in Python is an object.&lt;/p&gt;
+
+&lt;h3 id=&quot;better-code&quot;&gt;Better code&lt;/h3&gt;
+
+&lt;p&gt;To me, this feels unclean. It would be better if everything needed could sit
+inside the function. Like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;In [6]: def static_variables(latest):
+    ...:     __static_variables = dict(
+    ...:         sum=0, 
+    ...:         difference=0
+    ...:     )
+    ...:     for var in __static_variables:
+    ...:         if not hasattr(static_variables, var):
+    ...:             setattr(static_variables, var, __static_variables[var])
+    ...:     static_variables.difference = static_variables.sum - latest
+    ...:     static_variables.sum += latest
+    ...:     print(&#39;Sum:&#39;, static_variables.sum)
+    ...:     print(&#39;Difference:&#39;, static_variables.difference)
+    ...:     
+
+In [7]: static_variables(0)
+Sum: 0
+Difference: 0
+
+In [8]: static_variables(1)
+Sum: 1
+Difference: -1
+
+In [9]: static_variables(10)
+Sum: 11
+Difference: -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So that’s better. We have a dictionary containing all our static variables, and
+it all sits inside the function.&lt;/p&gt;
+
+&lt;p&gt;But now we’ve added several lines to the function.&lt;/p&gt;
+
+&lt;h3 id=&quot;best-code&quot;&gt;Best code&lt;/h3&gt;
+
+&lt;p&gt;This is just a reminder that you probably want to do this differently. Move
+this function into a class and use it as a class method or something. No?
+Still want to use a static variable?&lt;/p&gt;
+
+&lt;p&gt;Okay, then this is the best way I know how to do it. (That’s not to say that
+there aren’t much better ways, but it’s the best I could come up with.)&lt;/p&gt;
+
+&lt;p&gt;First, make a decorator (I use the &lt;a href=&quot;https://pypi.python.org/pypi/decorator&quot;&gt;decorator&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;def static(**kwargs):
+    def&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 22 Aug 2015 00:00:00 -0500</pubDate>
+        <link>ssh://lengau.net/programming/python/2015/08/22/python-static-variables/</link>
+        <guid isPermaLink="true">ssh://lengau.net/programming/python/2015/08/22/python-static-variables/</guid>
+        
+        
+        <category>programming</category>
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>What sudo does and why you shouldn&#39;t use it</title>
+        <description>&lt;p&gt;Occasionally, I stumble upon &lt;a href=&quot;http://www.circuitbasics.com/how-to-write-and-run-a-python-program-on-the-raspberry-pi/&quot;&gt;posts&lt;/a&gt; that include commands that
+are… to say the least, weird. They normally cover their purpose fairly well, but
+they often make some common mistakes, spreading these antipatterns to new users.
+One of the most common has to be abuse of &lt;a href=&quot;http://www.sudo.ws/&quot;&gt;&lt;code&gt;sudo&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before going any further, I’d like to discuss what sudo does.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-sudo-does&quot;&gt;What sudo does&lt;/h2&gt;
+
+&lt;p&gt;When asked, most people will tell you “it lets you run stuff as root”. And
+whilst that’s certainly true and is probably the most common usage, it’s not
+all sudo does. For example, did you know you can run commands as another
+(non-root) user with sudo?&lt;/p&gt;
+
+&lt;h3 id=&quot;run-as-another-user&quot;&gt;Run as another user&lt;/h3&gt;
+
+&lt;p&gt;Let’s say I’ve got an ftp server on my machine, which I use only on my home
+network. I want anyone on my home network to be able to read and write my ftp 
+directory without logging in. The directory is /srv/ftp and has permissions
+like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/srv/ftp$ ls -ld
+drwxr-xr-x 1 ftp nogroup 30 Aug 16 11:06 .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Obviously, I can’t just write a file in there, since I don’t have write access:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/srv/ftp$ touch dis
+touch: cannot touch ‘dis’: Permission denied
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But I have sudo access, so the answer is obvious, right? Just write it as root!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/srv/ftp$ sudo touch dis
+lengau@hyperion:/srv/ftp$ ls -l dis
+-rw-r--r-- 1 root root   0 Aug 16 11:10 dis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Well that worked. Now anyone can see the contents of my new file. But the
+anonymous user on my FTP server has the same permissions as the local user 
+&lt;code&gt;ftp&lt;/code&gt;. So I can’t write to it over ftp. Well, since i have the file, the answer
+is simple:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/srv/ftp$ sudo chown ftp:nogroup dis
+lengau@hyperion:/srv/ftp$ ls -l dis
+-rw-r--r-- 1 ftp nogroup 0 Aug 16 11:10 dis
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Okay. But that required me to enter a second command, and unless I had been
+paying attention to the permissions in the first place, I wouldn’t have noticed.&lt;/p&gt;
+
+&lt;p&gt;What if I create the file as the ftp user? That’s essentially the same as
+creating it as a remote user, so I shouldn’t have to mess with permissions and
+ownership;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/srv/ftp$ sudo -u ftp touch dat
+lengau@hyperion:/srv/ftp$ ls -l dat
+-rw-r--r-- 1 ftp nogroup 0 Aug 16 11:16 dat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That was easy.&lt;/p&gt;
+
+&lt;h3 id=&quot;safely-edit-files&quot;&gt;Safely edit files&lt;/h3&gt;
+
+&lt;p&gt;How would you edit files as another user?&lt;/p&gt;
+
+&lt;p&gt;If you’re like most people I know (and my bash history tells me I haven’t yet
+managed to fully break this habit either), you just use sudo to run your
+favourite text editor as root. A command like &lt;code&gt;sudo ed mytext&lt;/code&gt; might be fairly
+common in your command history. And for ed, that might be okay. But what if the
+command is &lt;code&gt;sudo emacs mytext&lt;/code&gt;? Or &lt;code&gt;sudo vim mytext&lt;/code&gt;? Or 
+&lt;code&gt;sudo some-notoriously-insecure-java-app mytext&lt;/code&gt;?&lt;/p&gt;
+
+&lt;p&gt;And what if you downloaded &lt;code&gt;mytext&lt;/code&gt; from http://suspicious-site.con?&lt;/p&gt;
+
+&lt;p&gt;Well I don’t have a magical solution that’ll prevent the security vulnerability
+from becoming a problem at all (although sandboxing might help), but we can
+limit the damage it’s likely to do. For a start, let’s not run any applications
+as root unless we really need to. And you don’t need to run your text editor
+as root.&lt;/p&gt;
+
+&lt;p&gt;There’s a convenient command called &lt;code&gt;sudoedit&lt;/code&gt; that lets you edit a file
+as root. (You can also run &lt;code&gt;sudo -e&lt;/code&gt; to achieve the same effect.) It’s a fairly
+simple, but extremely powerful program that simply copies the referenced file
+to a temporary file with permissions for you to edit it, starts your default
+text editor on the file, and, once the editor exits, updates the original
+file with the changed contents of the edited file.&lt;/p&gt;
+
+&lt;p&gt;So if we have this file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/tmp$ ls -l CANT_TOUCH_DIS 
+---------- 1 root root 0 Aug 16 11:48 CANT_TOUCH_DIS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I can edit it using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/tmp$ sudoedit CANT_TOUCH_DIS 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I do so, it opens my default text editor to &lt;code&gt;/var/tmp/CANT_TOUCH_DIS.XXfWyMR6&lt;/code&gt;.
+Let’s take a look at that file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:~$ ls -l /var/tmp/CANT_TOUCH_DIS.XXfWyMR6 /tmp/CANT_TOUCH_DIS 
+---------- 1 root   root   0 Aug 16 11:48 /tmp/CANT_TOUCH_DIS                                                        
+-rw------- 1 lengau lengau 0 Aug 16 11:48 /var/tmp/CANT_TOUCH_DIS.XXfWyMR6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So I can access the temporary copy of the file, and the best part is that my
+editor only ever needs to run as me. I can keep all of my customizations, and
+if I really want, I can use a graphical editor.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sudo-sudoedit-process-tree.png&quot; alt=&quot;Screenshot of sudoedit process tree. The editor process is a child of sudoedit
+and is running as the same user that bash is running as.&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As soon as I close my text editor, sudoedit deletes the file.&lt;/p&gt;
+
+&lt;h4 id=&quot;editing-other-files&quot;&gt;Editing other files&lt;/h4&gt;
+
+&lt;p&gt;As a side note, you can set what program you want as the editor for sudoedit by
+setting the &lt;code&gt;$SUDO_EDITOR&lt;/code&gt; environment variable. So if you want to edit an
+image, you can:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SUDO_EDITOR=krita sudoedit best_screenshot_ever.png
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;editing-as-another-user&quot;&gt;Editing as another user&lt;/h4&gt;
+
+&lt;p&gt;Like &lt;code&gt;sudo&lt;/code&gt;, &lt;code&gt;sudoedit&lt;/code&gt; lets you edit a file as another user rather than as
+root. So you can get output like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/etc$ sudoedit -u ftp /etc/shadow
+sudoedit: /etc/shadow: Permission denied
+lengau@hyperion:/etc$ sudoedit -u www-data /etc/shadow
+sudoedit: /etc/shadow: Permission denied
+lengau@hyperion:/etc$ cat /etc/shadow
+cat: /etc/shadow: Permission denied
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;restrict-root-access&quot;&gt;Restrict root access&lt;/h3&gt;
+
+&lt;p&gt;Let’s say you’re the administrator of a shared machine. Your users may need to
+perform certain actions as another shared user. The simple solution is to give
+them all the password for that user.&lt;/p&gt;
+
+&lt;p&gt;That solution is also wrong.&lt;/p&gt;
+
+&lt;p&gt;Instead, you can use sudo to give them access to run some (or all) commands
+as that user without giving them root access.&lt;/p&gt;
+
+&lt;p&gt;Why would you want this? LOGS! Every time you run a command with sudo, it gets
+logged. So when someone messes up the machine as the shared user, they can’t
+deny what they’ve done:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lengau@hyperion:/srv/ftp$ grep sudo /var/log/auth.log|tail
+Aug 16 12:03:55 hyperion sudo:   lengau : TTY=pts/0 ; PWD=/tmp ; USER=root ; COMMAND=sudoedit best_screenshot_ever.png
+Aug 16 12:03:55 hyperion sudoedit: pam_unix(sudo:session): session opened for user root by lengau(uid=0)
+Aug 16 12:04:28 hyperion sudoedit: pam_unix(sudo:session): session closed for user root
+Aug 16 12:06:59 hyperion sudo:   lengau : TTY=pts/0 ; PWD=/etc ; USER=ftp ; COMMAND=sudoedit /etc/shadow
+Aug 16 12:07:07 hyperion sudo:   lengau : TTY=pts/0 ; PWD=/etc ; USER=www-data ; COMMAND=sudoedit /etc/shadow
+Aug 16 12:07:21 hyperion sudo:   lengau : TTY=pts/0 ; PWD=/etc ; USER=ftp ; COMMAND=sudoedit /etc/shadow
+Aug 16 12:07:22 hyperion sudo:   lengau : TTY=pts/0 ; PWD=/etc ; USER=www-data ; COMMAND=sudoedit /etc/shadow
+Aug 16 12:07:52 hyperion sudo:   lengau : TTY=pts/0 ; PWD=/srv/ftp ; USER=ftp ; COMMAND=sudoedit something
+Aug 16 12:07:52 hyperion sudoedit: pam_unix(sudo:session): session opened for user ftp by lengau(uid=0)
+Aug 16 12:07:55 hyperion sudoedit: pam_unix(sudo:session): session closed for user ftp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;why-you-shouldnt-use-it&quot;&gt;Why you shouldn’t use it&lt;/h2&gt;
+
+&lt;p&gt;In the title for this post, I told you that you shouldn’t use sudo. Yet I’ve now
+gone on for ages about how useful it is.&lt;/p&gt;
+
+&lt;p&gt;What I mean isn’t that you shouldn’t use sudo at all. All the above text shows
+just how useful it can be when use correctly. But far too many people overuse
+sudo or use it badly. So here are a few do’s and don’ts for sudo:&lt;/p&gt;
+
+&lt;h3 id=&quot;dos&quot;&gt;Do’s&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;DO use &lt;code&gt;sudoedit&lt;/code&gt; when you need to edit a file as root or another user. 
+(Unless that file is your sudoers file, in which case PLEASE PLEASE PLEASE 
+use &lt;a href=&quot;http://www.sudo.ws/man/1.8.14/visudo.man.html&quot;&gt;visudo&lt;/a&gt;.)&lt;/li&gt;
+  &lt;li&gt;DO use &lt;code&gt;sudo&lt;/code&gt; when you need to run a command as another user.&lt;/li&gt;
+  &lt;li&gt;DO use &lt;code&gt;sudo&lt;/code&gt; to give out administrator access instead of handing out root 
+passwords or having shared accounts.&lt;/li&gt;
+  &lt;li&gt;DO read the &lt;a href=&quot;http://www.sudo.ws/man.html&quot;&gt;sudo manual pages&lt;/a&gt; to find out just what sudo can do for you.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;donts&quot;&gt;Don’t’s&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;DON’T edit a file by running the editor with &lt;code&gt;sudo&lt;/code&gt;. Use &lt;code&gt;sudoedit&lt;/code&gt; instead.&lt;/li&gt;
+  &lt;li&gt;DON’T use &lt;code&gt;sudo&lt;/code&gt; to gain more permissions than you need. Always try to run
+any command as the least-privileged user with access to do so.&lt;/li&gt;
+  &lt;li&gt;DON’T give out &lt;code&gt;sudo&lt;/code&gt; access unless you know precisely what access that is.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sun, 16 Aug 2015 00:00:00 -0500</pubDate>
+        <link>ssh://lengau.net/linux/terminal/commandline/cli/sudo/2015/08/16/how-to-use-sudoedit/</link>
+        <guid isPermaLink="true">ssh://lengau.net/linux/terminal/commandline/cli/sudo/2015/08/16/how-to-use-sudoedit/</guid>
+        
+        
+        <category>linux</category>
+        
+        <category>terminal</category>
+        
+        <category>commandline</category>
+        
+        <category>cli</category>
+        
+        <category>sudo</category>
+        
+      </item>
     
       <item>
         <title>Statement of Intent</title>
