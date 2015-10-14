@@ -5,9 +5,495 @@
     <description>A place for my random ramblings of rambledom.</description>
     <link>ssh://lengau.net/</link>
     <atom:link href="ssh://lengau.net/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 28 Sep 2015 14:14:07 -0500</pubDate>
-    <lastBuildDate>Mon, 28 Sep 2015 14:14:07 -0500</lastBuildDate>
+    <pubDate>Wed, 14 Oct 2015 17:53:39 -0500</pubDate>
+    <lastBuildDate>Wed, 14 Oct 2015 17:53:39 -0500</lastBuildDate>
     <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>Why Long Scale Numbers Are Better</title>
+        <description>&lt;p&gt;Note: This was originally a Jupyter notebook, which I converted. You can also
+&lt;a href=&quot;/Jupyter_Notebooks/Long_Scale_Numbers_Better.ipynb&quot;&gt;download the original.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;In the anglophone world, it’s generally accepted that 10&lt;sup&gt;9&lt;/sup&gt; is a billion. In my opinion, this is a bad idea. Specifically, it makes the naming of numbers more complicated.&lt;/p&gt;
+
+&lt;p&gt;Since pretty much everyone reading this is likely to use the short scale without even thinking about it, let me explain it to you by teaching you how to count using the Indian numbering system, which has a similar issue.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-indian-numbering-system&quot;&gt;The Indian Numbering System&lt;/h2&gt;
+
+&lt;p&gt;I’m not here to teach you Hindi or Urdu, so we’re just going to use the English names for the numbers. But I still need to introduce you to a few new names for numbers anyway I’m sure you’re familiar with these numbers:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Number&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;ten&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;100&lt;/td&gt;
+      &lt;td&gt;one hundred&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1 000&lt;/td&gt;
+      &lt;td&gt;one thousand&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10 000&lt;/td&gt;
+      &lt;td&gt;ten thousand&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;(Can we all just take a moment here to appreciate the use of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Thin_space&quot;&gt;thin space&lt;/a&gt; for digit grouping? Both commas and periods for digit grouping are a bad idea, because they’re also both decimal marks.)&lt;/p&gt;
+
+&lt;p&gt;So far, so normal. But this is where things start to change. You’re probably familiar with the number 1,00,000. You likely call it ‘one hundred thousand’ and would write it 100 000 (or with either a period or a comma as a thousands separator). In the Indian numbering system, this number is ‘one lakh’. After a thousand, the next named number is a lakh. One hundred lakh = one crore. Or in a table:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Scientific Notation&lt;/th&gt;
+      &lt;th&gt;Number&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;0&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;ten&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;100&lt;/td&gt;
+      &lt;td&gt;hundred&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;3&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000&lt;/td&gt;
+      &lt;td&gt;thousand&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;4&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;10 000&lt;/td&gt;
+      &lt;td&gt;ten thousand&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;5&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 00 000&lt;/td&gt;
+      &lt;td&gt;lakh&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;7&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 00 00 000&lt;/td&gt;
+      &lt;td&gt;crore&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;9&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 00 00 00 000&lt;/td&gt;
+      &lt;td&gt;arab&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;11&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 00 00 00 00 000&lt;/td&gt;
+      &lt;td&gt;kharab&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;13&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 00 00 00 00 00 000&lt;/td&gt;
+      &lt;td&gt;neel&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;15&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 00 00 00 00 00 00 000&lt;/td&gt;
+      &lt;td&gt;padm&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;I’m sure you find this a little bit strange. I did at first. But there’s actually a formula to it once you get to the larger numbers. Given the following list:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Lakh&lt;/li&gt;
+  &lt;li&gt;Crore&lt;/li&gt;
+  &lt;li&gt;Arab&lt;/li&gt;
+  &lt;li&gt;Kharab&lt;/li&gt;
+  &lt;li&gt;Neel&lt;/li&gt;
+  &lt;li&gt;Padm&lt;/li&gt;
+  &lt;li&gt;Shankh&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can figure out which number on the list to use for a number with this formula (where $n$ is the order of magnitude):&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;M = \frac{n-3}{2}&lt;/script&gt;
+
+&lt;h3 id=&quot;whats-wrong-with-it&quot;&gt;What’s wrong with it?&lt;/h3&gt;
+
+&lt;p&gt;To most English speakers outside of South Asia, this looks pretty strange. The first separator is at a thousand, but each separator after that is a hundred away. So you get a rather weird meshing of the numbers. This is why you have to go down by three orders of magnitude before counting the zeroes. It’s a fairly simple task, but most who aren’t used to it would likely say “this is overcomplicated”.&lt;/p&gt;
+
+&lt;p&gt;I agree.&lt;/p&gt;
+
+&lt;p&gt;What I don’t agree with is what normally follows it: “our system of a thousand, million, billion, makes much more sense.”&lt;/p&gt;
+
+&lt;h2 id=&quot;short-scale&quot;&gt;Short Scale&lt;/h2&gt;
+
+&lt;p&gt;Short scale is the number scale most common in the English speaking world. To copy the orders of magnitude table from above, its:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Order of Magnitude&lt;/th&gt;
+      &lt;th&gt;Number&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;0&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;ten&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;100&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;100&lt;/td&gt;
+      &lt;td&gt;hundred&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;3&lt;/sup&gt; = 1000&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000&lt;/td&gt;
+      &lt;td&gt;thousand&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;6&lt;/sup&gt; = 1000&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000 000&lt;/td&gt;
+      &lt;td&gt;million&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;9&lt;/sup&gt; = 1000&lt;sup&gt;3&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000 000 000&lt;/td&gt;
+      &lt;td&gt;billion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;12&lt;/sup&gt; = 1000&lt;sup&gt;4&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;trillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;15&lt;/sup&gt; = 1000&lt;sup&gt;5&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;quadrillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;18&lt;/sup&gt; = 1000&lt;sup&gt;6&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;quintillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;sup&gt;21&lt;/sup&gt; = 1000&lt;sup&gt;7&lt;/sup&gt;&lt;/td&gt;
+      &lt;td&gt;1 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;sextillion&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Now once one gets past a thousand, it’s all based on powers of a thousand. So for million, billion, trillion, etc, one can write a formula for it:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;M = \frac{n-3}{3} = \frac{n}{3} - 1&lt;/script&gt;
+
+&lt;p&gt;Or on powers of a thousand:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;M = t - 1&lt;/script&gt;
+
+&lt;p&gt;If you’re thinking “this looks an awful lot like the equation for the Indian numbering system,” you’d be correct. The only difference is that there’s a 3 in the denominator instead of a 2. It’s only a small amount more consistent because it uses powers of a thousand everywhere rather than one power of a thousand and then powers of a hundred.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-the-numbers-are-named-that-way&quot;&gt;Why the numbers are named that way&lt;/h3&gt;
+
+&lt;p&gt;Look at the powers starting at a million. They’re mostly just counting in Latin. It becomes much clearer after 10&lt;sup&gt;33&lt;/sup&gt;, one decillion. (decillion, undecillion, duodecillion, tredecillion, quattordecillion)&lt;/p&gt;
+
+&lt;p&gt;So as long as you know how to count in Latin and add the suffix &lt;em&gt;-illion&lt;/em&gt;, these orders of magnitude aren’t that hard. Except for the weird way you have to count them.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-partial-solution-to-the-weirdness-long-scale&quot;&gt;A partial solution to the weirdness: Long Scale&lt;/h2&gt;
+
+&lt;p&gt;Continental Europe already has this figured out. Although admittedly their earlier use of the short scale is at least partially to blame for this craziness in English, but let’s look at whay they do, and what Britain used to do, even well into the 20th century (North American English seems to have used the short scale from at least 1729. &lt;a href=&quot;https://en.wikipedia.org/wiki/Isaac_Greenwood&quot;&gt;Thanks, Harvard.&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;This solution is to use the long scale:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Scientific Notation&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Number&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;0&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
+      &lt;td&gt;one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;/td&gt;
+      &lt;td&gt;ten&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;100&lt;/td&gt;
+      &lt;td&gt;hundred&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;3&lt;/sup&gt; = 1000&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000&lt;/td&gt;
+      &lt;td&gt;thousand&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;6&lt;/sup&gt; = 1000000&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000&lt;/td&gt;
+      &lt;td&gt;million&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;12&lt;/sup&gt; = 1000000&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;billion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;18&lt;/sup&gt; = 1000000&lt;sup&gt;3&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;trillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;21&lt;/sup&gt; = 1000000&lt;sup&gt;4&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;quadrillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;24&lt;/sup&gt; = 1000000&lt;sup&gt;5&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;quintillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;27&lt;/sup&gt; = 1000000&lt;sup&gt;6&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;sextillion&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Look at how elegant that is. After a million, it’s just the power of a million, translated into Latin.&lt;/p&gt;
+
+&lt;p&gt;There’s also a way to write a thousand million in a shorter way: “milliard”. In fact, that works for the entire scale. This is called the Peletier scale, after &lt;a href=&quot;https://en.wikipedia.org/wiki/Jacques_Pelletier_du_Mans&quot;&gt;Jacques Peletier du Mans&lt;/a&gt;. He made his own mistakes in it, but those were fixed three hundred years ago.&lt;/p&gt;
+
+&lt;p&gt;Note how simple this scale is for powers of a million:&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;M = m = \frac{n}{6}&lt;/script&gt;
+
+&lt;p&gt;Easy, right?&lt;/p&gt;
+
+&lt;h3 id=&quot;complications&quot;&gt;Complications&lt;/h3&gt;
+
+&lt;p&gt;There’s only really one complication to the long scale: People are already using “a billion” and “a trillion” to mean the wrong thing. That’s actually less of a problem than one might think, though. Very little text uses numbers larger than “a trillion” written out, so if we simply make exceptions for those two numbers, we don’t have to worry about it any more. I propose the fairly simple terms “terrion” for a billion (10&lt;sup&gt;12&lt;/sup&gt;), coming from the SI prefix “tera” for the same, and “exillion” for a trillion (10&lt;sup&gt;18&lt;/sup&gt;).&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Scientific Notation&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Number&lt;/th&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;0&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
+      &lt;td&gt;one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;/td&gt;
+      &lt;td&gt;ten&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;100&lt;/td&gt;
+      &lt;td&gt;hundred&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;3&lt;/sup&gt; = 1000&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000&lt;/td&gt;
+      &lt;td&gt;thousand&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;6&lt;/sup&gt; = 1000000&lt;sup&gt;1&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000&lt;/td&gt;
+      &lt;td&gt;million&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;12&lt;/sup&gt; = 1000000&lt;sup&gt;2&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;terrion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;18&lt;/sup&gt; = 1000000&lt;sup&gt;3&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;exillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;21&lt;/sup&gt; = 1000000&lt;sup&gt;4&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;quadrillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;24&lt;/sup&gt; = 1000000&lt;sup&gt;5&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;quintillion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;sup&gt;27&lt;/sup&gt; = 1000000&lt;sup&gt;6&lt;/sup&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;1 000 000 000 000 000 000 000 000 000 000 000 000&lt;/td&gt;
+      &lt;td&gt;sextillion&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;real-world-usage&quot;&gt;Real world usage&lt;/h3&gt;
+
+&lt;p&gt;A few real-world analogies might help you out:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The world’s GDP is about 77*10&lt;sup&gt;12&lt;/sup&gt; USD. That’s seventy-seven terrion dollars.&lt;/li&gt;
+  &lt;li&gt;The EU’s GDP is about 18*10&lt;sup&gt;12&lt;/sup&gt; USD (roguhly 16*10&lt;sup&gt;12&lt;/sup&gt; euros). Sixteen terrion euros.&lt;/li&gt;
+  &lt;li&gt;The United States has a GDP of roughly 17*10&lt;sup&gt;12&lt;/sup&gt; USD. Seventeen terrion dollars.&lt;/li&gt;
+  &lt;li&gt;NASA’s budget for 2015 is eighteen milliard, ten million dollars.&lt;/li&gt;
+  &lt;li&gt;The ESA’s budget? Four milliard, four hundred and thirty million euros.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;in-python&quot;&gt;In Python&lt;/h3&gt;
+
+&lt;p&gt;It might be easier to think about this algorithmically. Perhaps a piece of code like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log10&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;DIGITS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;zero&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;one&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;two&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;three&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;four&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;&amp;#39;five&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;six&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;seven&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;eight&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;nine&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TEENS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;ten&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;eleven&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;twelve&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;thirteen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;fourteen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+         &lt;span class=&quot;s&quot;&gt;&amp;#39;fifteen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;sixteen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;seventeen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;eighteen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;nineteen&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;TENS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;ten&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;twenty&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;thirty&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;forty&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;fifty&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&amp;#39;sixty&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;seventy&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;eighty&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;ninety&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HUNDRED&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;hundred&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;HUNDRED_SEPARATOR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; and &amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;THOUSAND_SEPARATOR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MILLION_SEPARATOR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;MILLIONS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;#39;million&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;terrion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;exillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;quadrillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;quintillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;&amp;#39;sextillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;octillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;nonillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;decillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;undecillion&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;THOUSANDS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&amp;#39;thousand&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;milliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;billiard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;trilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;quadrilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&amp;#39;quintilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;sextilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;octilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;nonilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;decilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&amp;#39;undecilliard&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;big_partial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;magnitude_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bigs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;littles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bigs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;littles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;littles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;sd&quot;&gt;&amp;quot;&amp;quot;&amp;quot;Writes a number in English.&lt;/span&gt;
+
+&lt;span class=&quot;sd&quot;&gt;    Arguments:&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        number: an integer number to write.&lt;/span&gt;
+
+&lt;span class=&quot;sd&quot;&gt;    Returns:&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;        A string containing the number written out.&lt;/span&gt;
+&lt;span class=&quot;sd&quot;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;number_strings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DIGITS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TEENS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;units&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;tens&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TENS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tens&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tens&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;big_partial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HUNDRED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HUNDRED_SEPARATOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;big_partial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;THOUSANDS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;THOUSAND_SEPARATOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bigs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;littles&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;explicit_zero&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bigs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;littles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bigs&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MILLIONS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magnitude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MILLION_SEPARATOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HUNDRED_SEPARATOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;littles&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strings&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# A few demos:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;571&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6423&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;65536&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;142342&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+          &lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000000000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10000000003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;one
+two
+ten
+twelve
+twenty-five
+ninety-nine
+one hundred
+five hundred and seventy-one
+six thousand, four hundred and twenty-three
+sixty-five thousand, five hundred and thirty-six
+one hundred and forty-two thousand, three hundred and forty-two
+one
+one million and one
+one milliard
+ten milliard and three
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, it’s not particularly difficult to write numbers using long scale. Why don’t you try it?&lt;/p&gt;
+</description>
+        <pubDate>Wed, 14 Oct 2015 07:26:50 -0500</pubDate>
+        <link>ssh://lengau.net/numbers/2015/10/14/long-scale/</link>
+        <guid isPermaLink="true">ssh://lengau.net/numbers/2015/10/14/long-scale/</guid>
+        
+        
+        <category>numbers</category>
+        
+      </item>
     
       <item>
         <title>Python: Itertools and why you should use it.</title>
@@ -21,7 +507,7 @@ generators. I’ll cover just a few here.&lt;/p&gt;
 
 &lt;h2 id=&quot;review-count-and-product&quot;&gt;Review: count and product&lt;/h2&gt;
 
-&lt;p&gt;&lt;code&gt;count&lt;/code&gt; and &lt;code&gt;[product]&lt;/code&gt; are the two functions from &lt;code&gt;itertools&lt;/code&gt; that I see used
+&lt;p&gt;&lt;code&gt;count&lt;/code&gt; and &lt;code&gt;product&lt;/code&gt; are the two functions from &lt;code&gt;itertools&lt;/code&gt; that I see used
 the most, although I do still see (and am guilty of writing) code that uses
 more lines to do the same things. A comparison of &lt;code&gt;count&lt;/code&gt; and &lt;code&gt;product&lt;/code&gt; to the
 naïve code that forms the same logic should suffice.&lt;/p&gt;
